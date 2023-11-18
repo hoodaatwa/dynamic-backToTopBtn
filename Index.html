@@ -156,67 +156,35 @@ code for the scrollToTopBtn is as follows
   <pre>
 
     <code id="scrollToTopBtnCode">
-      &lt;style id="scrollToTopBtnStyle"&gt;
-
-        #scrollToTopBtn {
-
-          display: none;
-
-          position: absolute; /* Set to absolute position */
-
-          border: none;
-
-          cursor: pointer;
-
-          text-align: center;
-
-          bottom: 20px;
-
-          padding: 10px; /* Initial padding value */
-
-        }
-
-      &lt;/style&gt;
-
-      &lt;button id="scrollToTopBtn" onclick="scrollToTop()"&gt;&lt;i class="fas fa-arrow-up"&gt;&lt;/i&gt;&lt;/button&gt;
-
-
-
-      &lt;script&gt;
-
-        // Show or hide the button based on scroll position
-
-        window.onscroll = function() {
-
-          var scrollToTopBtn = document.getElementById("scrollToTopBtn");
-
-          if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-
-            scrollToTopBtn.style.display = "block";
-
-          } else {
-
-            scrollToTopBtn.style.display = "none";
-
-          }
-
-        };
-
-
-
-        // Scroll to the top of the page
-
-        function scrollToTop() {
-
-          document.body.scrollTop = 0; // For Safari
-
-          document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE, and Opera
-
-        }
-
-      &lt;/script&gt;
-
-    </code>
+&lt;style id="scrollToTopBtnStyle"&gt;
+#scrollToTopBtn {
+display: none;
+position: absolute; /* Set to absolute position */
+border: none;
+cursor: pointer;
+text-align: center;
+bottom: 20px;
+padding: 10px; /* Initial padding value */
+}
+&lt;/style&gt;
+&lt;button id="scrollToTopBtn" onclick="scrollToTop()"&gt;&lt;i class="fas fa-arrow-up"&gt;&lt;/i&gt;&lt;/button&gt;
+&lt;script&gt;
+// Show or hide the button based on scroll position
+window.onscroll = function() {
+var scrollToTopBtn = document.getElementById("scrollToTopBtn");
+if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+scrollToTopBtn.style.display = "block";
+} else {
+scrollToTopBtn.style.display = "none";
+}
+};
+// Scroll to the top of the page
+function scrollToTop() {
+document.body.scrollTop = 0; // For Safari
+document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE, and Opera
+}
+&lt;/script&gt;
+ </code>
 
   </pre>
 
