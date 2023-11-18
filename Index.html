@@ -1,2 +1,320 @@
-<h1 align="center">My Jumper Game</h1>
-<p align="center">A fun flappy-bird like game.</p>
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+
+    #container {
+
+      position: relative;
+
+      width: 100%;
+
+      height: 200px;
+
+      overflow: scroll;
+
+      border: 1px solid #000;
+
+    }
+
+
+
+    #scrollToTopBtn {
+
+      display: block;
+
+      position: absolute; /* Set to absolute position */
+
+      border: none;
+
+      cursor: pointer;
+
+      text-align: center;
+
+      bottom: 20px;
+
+      padding: 10px; /* Initial padding value */
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+
+
+<div id="container">
+
+  <!-- Container for the result -->
+
+  <div id="scrollToTopBtn" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i></div>
+
+
+
+  <!-- Your website content goes here -->
+
+  <p>preview:<br>This is some sample content inside the scrollable container.</p>
+
+  <!-- Add more content as needed -->
+
+
+
+</div>
+
+
+
+<label for="colorInput">Color:</label>
+
+<input type="color" id="colorInput" onchange="changeStyle()"><br>
+
+
+
+<label for="bgColorInput">Background Color:</label>
+
+<input type="color" id="bgColorInput" onchange="changeStyle()"><br>
+
+
+
+<label for="widthInput">Width:</label>
+
+<input type="number" id="widthInput" onchange="changeStyle()"><br>
+
+
+
+<label for="heightInput">Height:</label>
+
+<input type="number" id="heightInput" onchange="changeStyle()"><br>
+
+
+
+<label for="borderRadiusInput">Border Radius:</label>
+
+<input type="number" id="borderRadiusInput" onchange="changeStyle()"><br>
+
+
+
+<label for="positionRightInput">Position Right:</label>
+
+<input type="number" id="positionRightInput" onchange="changeStyle()"><br>
+
+
+
+<label for="positionBottomInput">Position Bottom:</label>
+
+<input type="number" id="positionBottomInput" onchange="changeStyle()"><br>
+
+
+
+<label for="positionLeftInput">Position Left:</label>
+
+<input type="number" id="positionLeftInput" onchange="changeStyle()"><br>
+
+
+
+<label for="fontSizeInput">Font Size:</label>
+
+<input type="number" id="fontSizeInput" onchange="changeStyle()"><br>
+
+
+
+<label for="paddingInput">Padding:</label>
+
+<input type="number" id="paddingInput" onchange="changeStyle()"><br>
+
+
+
+<!-- Paragraph with scrollToTopBtn code and styles -->
+
+<p>
+
+  Make sure font-awesome does exist in your template or you can copy the following link:
+
+<pre>
+
+    <code>
+
+&lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"&gt;
+
+</pre>
+
+    </code>
+
+code for the scrollToTopBtn is as follows
+
+  <pre>
+
+    <code id="scrollToTopBtnCode">
+
+      &lt;style id="scrollToTopBtnStyle"&gt;
+
+        #scrollToTopBtn {
+
+          display: none;
+
+          position: absolute; /* Set to absolute position */
+
+          border: none;
+
+          cursor: pointer;
+
+          text-align: center;
+
+          bottom: 20px;
+
+          padding: 10px; /* Initial padding value */
+
+        }
+
+      &lt;/style&gt;
+
+      &lt;button id="scrollToTopBtn" onclick="scrollToTop()"&gt;&lt;i class="fas fa-arrow-up"&gt;&lt;/i&gt;&lt;/button&gt;
+
+
+
+      &lt;script&gt;
+
+        // Show or hide the button based on scroll position
+
+        window.onscroll = function() {
+
+          var scrollToTopBtn = document.getElementById("scrollToTopBtn");
+
+          if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+
+            scrollToTopBtn.style.display = "block";
+
+          } else {
+
+            scrollToTopBtn.style.display = "none";
+
+          }
+
+        };
+
+
+
+        // Scroll to the top of the page
+
+        function scrollToTop() {
+
+          document.body.scrollTop = 0; // For Safari
+
+          document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE, and Opera
+
+        }
+
+      &lt;/script&gt;
+
+    </code>
+
+  </pre>
+
+</p>
+
+<br><br>
+
+<script>
+
+  // Show or hide the button based on scroll position
+
+  document.getElementById("container").onscroll = function() {
+
+    var scrollToTopBtn = document.getElementById("scrollToTopBtn");
+
+    if (document.getElementById("container").scrollTop > 0) {
+
+      scrollToTopBtn.style.display = "block";
+
+    } else {
+
+      scrollToTopBtn.style.display = "none";
+
+    }
+
+  };
+
+
+
+  // Scroll to the top of the container
+
+  function scrollToTop() {
+
+    document.getElementById("container").scrollTop = 0;
+
+  }
+
+  // Change button style based on input values
+
+  function changeStyle() {
+
+    var scrollToTopBtn = document.getElementById("scrollToTopBtn");
+
+    var colorInput = document.getElementById("colorInput").value;
+
+    var bgColorInput = document.getElementById("bgColorInput").value;
+
+    var widthInput = document.getElementById("widthInput").value + "px";
+
+    var heightInput = document.getElementById("heightInput").value + "px";
+
+    var borderRadiusInput = document.getElementById("borderRadiusInput").value + "px";
+
+    var positionRightInput = document.getElementById("positionRightInput").value + "px";
+
+    var positionBottomInput = document.getElementById("positionBottomInput").value + "px";
+
+    var positionLeftInput = document.getElementById("positionLeftInput").value + "px";
+
+    var fontSizeInput = document.getElementById("fontSizeInput").value + "px";
+
+    var paddingInput = document.getElementById("paddingInput").value + "px";
+
+
+
+    // Update styles dynamically
+
+    scrollToTopBtn.style.color = colorInput;
+
+    scrollToTopBtn.style.backgroundColor = bgColorInput;
+
+    scrollToTopBtn.style.width = widthInput;
+
+    scrollToTopBtn.style.height = heightInput;
+
+    scrollToTopBtn.style.borderRadius = borderRadiusInput;
+
+    scrollToTopBtn.style.right = positionRightInput;
+
+    scrollToTopBtn.style.bottom = positionBottomInput;
+
+    scrollToTopBtn.style.left = positionLeftInput;
+
+    scrollToTopBtn.style.fontSize = fontSizeInput;
+
+    scrollToTopBtn.style.padding = paddingInput;
+
+
+
+    // Update styles within the code tag
+
+    var codeTag = document.getElementById("scrollToTopBtnCode");
+
+    codeTag.innerHTML = '&lt;style id="scrollToTopBtnStyle"&gt;\n #scrollToTopBtn {\n display: none;\n position: absolute; /* Set to absolute position */\n border: none;\n cursor: pointer;\n text-align: center;\n right: ' + positionRightInput + ';\n left: ' + positionLeftInput + ';\n bottom: ' + positionBottomInput + ';\n padding: ' + paddingInput + ';\n color: ' + colorInput + ';\n background-color: ' + bgColorInput + ';\n width: ' + widthInput + ';\n height: ' + heightInput + ';\n border-radius: ' + borderRadiusInput + ';\n }\n&lt;/style&gt;\n&lt;button id="scrollToTopBtn" onclick="scrollToTop()"&gt;&lt;i class="fas fa-arrow-up"&gt;&lt;/i&gt;&lt;/button&gt;\n&lt;script&gt;\n // Show or hide the button based on scroll position\n window.onscroll = function() {\n var scrollToTopBtn = document.getElementById("scrollToTopBtn");\n if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {\n scrollToTopBtn.style.display = "block";\n } else {\n scrollToTopBtn.style.display = "none";\n }\n };\n\n // Scroll to the top of the page\n function scrollToTop() {\n document.body.scrollTop = 0; // For Safari\n document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE, and Opera\n }\n&lt;/script&gt;';
+
+  }
+
+</script>
+
+
+
+</body>
+
+</html>
