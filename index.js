@@ -87,8 +87,6 @@
 
   }
 
-
-
   const currentPageLocation = window.location.href;
 
   let displayedRepos = 0; // Counter for displayed repositories
@@ -226,4 +224,3 @@
     }
 
   }
-
