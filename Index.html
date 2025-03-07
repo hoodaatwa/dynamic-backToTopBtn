@@ -1,795 +1,665 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customize Back to Top Button</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="index.css">
-    <title>customize back to top button</title>  
-
-    <!-- Material-UI styles -->
-
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mui/system@5.0.1/dist/mui.min.css" integrity="sha384-GLhlTQ8iKSeUcycr6i3AxSsLOp/5StETHxHjOVq9XuWqIbbVZNyQOdX+yG5bwDciF" crossorigin="anonymous">
-
-  <!-- Include Material-UI styles and icons -->
-
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mui/material@5.0.1/dist/material-design-icons/iconfont/material-icons.css"
-
-    integrity="sha384-rGi1CEVZxh5F2neuJb3Nm4MEWxh1OrlCcFCi5TjW60RPI+EBo3MBukk1MTtPHtah" crossorigin="anonymous">
-
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700&display=swap">
   <style>
+    :root {
+      --primary-color: #4361ee;
+      --text-color: #333;
+      --bg-color: #fff;
+      --light-gray: #f5f7fa;
+      --border-color: #e0e0e0;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      --border-radius: 12px;
+    }
 
-
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     body {
-
-            font-family: 'Roboto', sans-serif;
-
-            margin: 0;
-
-            padding: 0px;
-
-        }
-
-
-
-    #navbar {
-
-      position: fixed;
-
-      top: 0px;
-
-      left: 0;
-
-      width: 100%;
-
-      background-color: white;
-
-      padding: 10px;
-
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-
-      z-index: 3;
-
-    }
-
-
-
-    #menuToggle {
-
-      cursor: pointer;
-
-      transition: transform 0.3s;
-
-      padding: 5px;
-
-      width: 20px;
-
-      box-sizing: content-box;
-
-    }
-
-
-
-    #menuIcon {
-
-      font-size: 24px;
-
-      color: #1976D2;
-
-    }
-
-
-
-    #menuIcon.close {
-
-      transform: rotate(180deg);
-
-    }
-
-
-
-    #menuOverlay {
-
-      position: fixed;
-
-      top: 0px;
-
-      left: 0;
-
-      width: 100%;
-
-      height: 100%;
-
-      background-color: rgba(0, 0, 0, 0.5);
-
-      display: none;
-
-      z-index: 2;
-
-      overflow-y: auto;
-
-    }
-
-
-
-    #repoList {
-
-      display: flex;
-
-      flex-wrap: wrap;
-
-      justify-content: space-around;
-
+      font-family: 'Inter', sans-serif;
+      color: var(--text-color);
+      background-color: var(--light-gray);
+      line-height: 1.6;
       padding: 0;
-
-      max-width: 800px;
-
-      margin: 70px auto auto;
-
+      margin: 0;
     }
 
-
-
-    .repoCard {
-
-      background-color: white;
-
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-
-      margin: 10px;
-
-      padding: 20px;
-
-      width: 100%;
-
-      border-radius: 8px;
-
-      transition: box-shadow 0.3s;
-
-      cursor: pointer;
-
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem;
     }
 
-
-
-    .repoCard:hover {
-
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-
+    header {
+      background-color: var(--bg-color);
+      box-shadow: var(--shadow);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
     }
 
-
-
-    .repoTitle {
-
-      font-size: 1.5rem;
-
-      color: #1976D2;
-
-      margin-bottom: 10px;
-
-    }
-
-
-
-    .repoDescription {
-
-      color: #555;
-
-      margin-bottom: 15px;
-
-    }
-
-
-
-    .repoLink {
-
+    .navbar {
       display: flex;
-
+      justify-content: space-between;
       align-items: center;
-
-      justify-content: flex-start;
-
-      margin-top: 15px;
-
+      padding: 0.75rem 1.5rem;
     }
 
-
-
-    .repoLink a {
-
-      color: white;
-
-      text-decoration: none;
-
-      background-color: #1976D2;
-
-      padding: 10px 15px;
-
-      border-radius: 5px;
-
-      display: inline-block;
-
-      transition: background-color 0.3s;
-
-    }
-
-
-
-    .repoLink a:hover {
-
-      background-color: #1565C0;
-
-    }
-
-
-
-    .repoLink i {
-
-      margin-left: 5px;
-
-    }
-
-
-
-    .center {
-
-      color: white;
-
-      text-decoration: none;
-
-      background-color: #1976D2;
-
-      padding: 10px 15px;
-
-      border-radius: 5px;
-
-      display: inline-block;
-
-      transition: background-color 0.3s;
-
-      margin: 10px;
-
-    }
-
-  </style>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <style>
-body {
-    padding: 20px;
-    font-family: fantasy;
-    font-size: x-large;
-    width: auto;
-}
-label {
-    font-size: x-large;
-    font-family: fantasy;
-    text-wrap: nowrap;
-    padding-left: 40px;
-}
-#container {
-    position: relative;
-    width: 100%;
-    height: 200px;
-    border: 3px dotted #000;
-    margin-top: 55px;
-}
-input {
-    height: 30px;
-    font-size: 18px;
-    padding: 5px 10px;
-    outline: none;
-    background: #FFFFFF;
-    color: #000000;
-    border: 1px solid #C4D1EB;
-    border-radius: 5px;
-    box-shadow: 3px 3px 2px 0px #E2E2E2;
-}
-input#bgColorInput ,input#colorInput{
-    min-width: 50px;
-
-}
- pre {
-    background-color: beige;
-    overflow:auto;
-}
- #scrollToTopBtn {
-      display: block;
-
-      position: absolute; /* Set to absolute position */
-
+    .menu-toggle {
+      background: none;
       border: none;
-
+      color: var(--primary-color);
+      font-size: 1.5rem;
       cursor: pointer;
-
-      text-align: center;
-
-      bottom: 20px;
-
-      padding: 10px; /* Initial padding value */
-
+      padding: 0.5rem;
+      border-radius: 50%;
+      transition: background-color 0.2s;
     }
-#footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 15px;
-    box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.1);
-    overflow: auto;
-}
+
+    .menu-toggle:hover {
+      background-color: rgba(67, 97, 238, 0.1);
+    }
+
+    .app-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--primary-color);
+    }
+
+    .menu-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: none;
+      z-index: 99;
+      overflow-y: auto;
+      padding-top: 5rem;
+    }
+
+    .repo-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.5rem;
+    }
+
+    .main-content {
+      margin-top: 5rem;
+      padding: 1.5rem;
+    }
+
+    .section {
+      background-color: var(--bg-color);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--primary-color);
+    }
+
+    /* Preview container */
+    .preview-container {
+      position: relative;
+      width: 100%;
+      height: 250px;
+      border: 2px dashed #ccc;
+      border-radius: var(--border-radius);
+      background-color: var(--light-gray);
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      overflow: auto;
+    }
+
+    .preview-title {
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      color: #555;
+    }
+
+    /* Controls */
+    .customizer {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 1rem;
+    }
+
+    .control-group label {
+      font-size: 0.875rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      color: #555;
+    }
+
+    .control-input {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    input {
+      height: 40px;
+      font-size: 0.9rem;
+      padding: 0.5rem;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      outline: none;
+      background: var(--bg-color);
+      color: var(--text-color);
+      width: 100%;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    input:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.2);
+    }
+
+    input[type="color"] {
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      border: 1px solid var(--border-color);
+    }
+
+    /* Code section */
+    .code-section {
+      margin-top: 2rem;
+    }
+
+    pre {
+      background-color: #f8f9fc;
+      border-radius: var(--border-radius);
+      padding: 1rem;
+      overflow: auto;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      border: 1px solid var(--border-color);
+    }
+
+    code {
+      font-family: 'Courier New', Courier, monospace;
+      white-space: pre-wrap;
+    }
+
+    .code-title {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #555;
+    }
+
+    .copy-btn {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .copy-btn:hover {
+      background-color: #3651d3;
+    }
+
+    /* Scroll to top button (in preview) */
+    #scrollToTopBtn {
+      display: block;
+      position: absolute;
+      border: none;
+      cursor: pointer;
+      text-align: center;
+      bottom: 20px;
+      right: 20px;
+      padding: 10px;
+      background-color: var(--primary-color);
+      color: white;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      font-size: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    /* Repository cards */
+    .repo-card {
+      background-color: var(--bg-color);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      padding: 1.5rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+    }
+
+    .repo-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .repo-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--primary-color);
+      margin-bottom: 0.75rem;
+    }
+
+    .repo-description {
+      color: #555;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .repo-link a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: white;
+      text-decoration: none;
+      background-color: var(--primary-color);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: background-color 0.2s;
+    }
+
+    .repo-link a:hover {
+      background-color: #3651d3;
+    }
+
+    .center-link {
+      display: flex;
+      justify-content: center;
+      margin-top: 1.5rem;
+    }
+
+    .center-link a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: white;
+      text-decoration: none;
+      background-color: var(--primary-color);
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: background-color 0.2s;
+    }
+
+    .center-link a:hover {
+      background-color: #3651d3;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .customizer {
+        grid-template-columns: 1fr;
+      }
+      
+      .repo-list {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
-
 </head>
-
 <body>
+  <header>
+    <div class="navbar">
+      <div class="app-title">Back To Top Button Customizer</div>
+      <button class="menu-toggle" onclick="toggleMenu()">
+        <i id="menuIcon" class="fas fa-bars"></i>
+      </button>
+    </div>
+  </header>
 
+  <div id="menuOverlay" class="menu-overlay" onclick="toggleMenu()">
+    <div id="repoList" class="repo-list"></div>
+  </div>
 
+  <div class="main-content container">
+    <div class="section">
+      <h2 class="section-title">Button Preview</h2>
+      <div id="container" class="preview-container">
+        <div class="preview-title">Scrollable preview area:</div>
+        <p>This is some sample content inside the scrollable container. Scroll down to see the back to top button appear.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <button id="scrollToTopBtn" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i></button>
+      </div>
 
+      <div class="customizer">
+        <div class="control-group">
+          <label for="colorInput">Text Color</label>
+          <div class="control-input">
+            <input type="color" id="colorInput" value="#ffffff" onchange="changeStyle()">
+            <input type="text" id="colorHex" value="#ffffff" onchange="updateColorFromHex('color')">
+          </div>
+        </div>
 
+        <div class="control-group">
+          <label for="bgColorInput">Background Color</label>
+          <div class="control-input">
+            <input type="color" id="bgColorInput" value="#4361ee" onchange="changeStyle()">
+            <input type="text" id="bgColorHex" value="#4361ee" onchange="updateColorFromHex('bg')">
+          </div>
+        </div>
 
+        <div class="control-group">
+          <label for="widthInput">Width (px)</label>
+          <input type="number" id="widthInput" value="40" onchange="changeStyle()">
+        </div>
 
+        <div class="control-group">
+          <label for="heightInput">Height (px)</label>
+          <input type="number" id="heightInput" value="40" onchange="changeStyle()">
+        </div>
 
+        <div class="control-group">
+          <label for="borderRadiusInput">Border Radius (px)</label>
+          <input type="number" id="borderRadiusInput" value="50" onchange="changeStyle()">
+        </div>
 
+        <div class="control-group">
+          <label for="positionRightInput">Position Right (px)</label>
+          <input type="number" id="positionRightInput" value="20" onchange="changeStyle()">
+        </div>
 
+        <div class="control-group">
+          <label for="positionBottomInput">Position Bottom (px)</label>
+          <input type="number" id="positionBottomInput" value="20" onchange="changeStyle()">
+        </div>
 
+        <div class="control-group">
+          <label for="positionLeftInput">Position Left (px)</label>
+          <input type="number" id="positionLeftInput" value="" onchange="changeStyle()" placeholder="Leave blank for auto">
+        </div>
 
-  <div id="navbar">
+        <div class="control-group">
+          <label for="fontSizeInput">Font Size (px)</label>
+          <input type="number" id="fontSizeInput" value="16" onchange="changeStyle()">
+        </div>
 
-    <div id="menuToggle" onclick="toggleMenu()">
-
-      <i id="menuIcon" class="fas fa-bars"></i>
-
+        <div class="control-group">
+          <label for="paddingInput">Padding (px)</label>
+          <input type="number" id="paddingInput" value="10" onchange="changeStyle()">
+        </div>
+      </div>
     </div>
 
+    <div class="section code-section">
+      <h2 class="section-title">Implementation Code</h2>
+      <div class="code-title">
+        <button class="copy-btn" onclick="copyToClipboard()">
+          <i class="fas fa-copy"></i> Copy Code
+        </button>
+      </div>
+      <pre><code id="scrollToTopBtnCode"></code></pre>
+      
+      <div class="code-title">
+        <i class="fas fa-info-circle"></i> Font Awesome Requirement
+      </div>
+      <pre><code>&lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"&gt;</code></pre>
+    </div>
   </div>
 
-
-
-  <div id="menuOverlay" onclick="toggleMenu()">
-
-    <div id="repoList"></div>
-
-  </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div id="container">
-
-  <!-- Container for the result -->
-
-  <div id="scrollToTopBtn" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i></div>
-
-
-
-  <!-- Your website content goes here -->
-
-  <p>preview:<br>This is some sample content inside the scrollable container.</p>
-
-  <!-- Add more content as needed -->
-
-
-
-</div>
-
-<div id="footer">
-
-
-<label for="colorInput">Color:</label>
-
-<input type="color" id="colorInput" onchange="changeStyle()"><br>
-
-
-
-<label for="bgColorInput">Background Color:</label>
-
-<input type="color" id="bgColorInput" onchange="changeStyle()"><br>
-
-
-
-<label for="widthInput">Width:</label>
-
-<input type="number" id="widthInput" onchange="changeStyle()"><br>
-
-
-
-<label for="heightInput">Height:</label>
-
-<input type="number" id="heightInput" onchange="changeStyle()"><br>
-
-
-
-<label for="borderRadiusInput">Border Radius:</label>
-
-<input type="number" id="borderRadiusInput" onchange="changeStyle()"><br>
-
-
-
-<label for="positionRightInput">Position Right:</label>
-
-<input type="number" id="positionRightInput" onchange="changeStyle()"><br>
-
-
-
-<label for="positionBottomInput">Position Bottom:</label>
-
-<input type="number" id="positionBottomInput" onchange="changeStyle()"><br>
-
-
-
-<label for="positionLeftInput">Position Left:</label>
-
-<input type="number" id="positionLeftInput" onchange="changeStyle()"><br>
-
-
-
-<label for="fontSizeInput">Font Size:</label>
-
-<input type="number" id="fontSizeInput" onchange="changeStyle()"><br>
-
-
-
-<label for="paddingInput">Padding:</label>
-
-<input type="number" id="paddingInput" onchange="changeStyle()"><br>
-
-  </div>
-
-<!-- Paragraph with scrollToTopBtn code and styles -->
-
-<p>
-
-  Make sure font-awesome does exist in your template or you can copy the following link:
-
-<pre>
-
-    <code>
-&lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"&gt;
-    </code>
-  </pre>
-
-code for the scrollToTopBtn is as follows
-
-  <pre>
-
-    <code id="scrollToTopBtnCode">
-&lt;style id="scrollToTopBtnStyle"&gt;
+  <script>
+    // Initial style update
+    window.onload = function() {
+      changeStyle();
+    };
+
+    // Preview container scroll event
+    document.getElementById("container").onscroll = function() {
+      var scrollToTopBtn = document.getElementById("scrollToTopBtn");
+      if (document.getElementById("container").scrollTop > 0) {
+        scrollToTopBtn.style.display = "flex";
+        scrollToTopBtn.style.justifyContent = "center";
+        scrollToTopBtn.style.alignItems = "center";
+      } else {
+        scrollToTopBtn.style.display = "none";
+      }
+    };
+
+    // Scroll to top function
+    function scrollToTop() {
+      document.getElementById("container").scrollTop = 0;
+    }
+
+    // Update color inputs when hex is manually entered
+    function updateColorFromHex(type) {
+      if (type === 'color') {
+        var hexInput = document.getElementById("colorHex");
+        document.getElementById("colorInput").value = hexInput.value;
+      } else if (type === 'bg') {
+        var hexInput = document.getElementById("bgColorHex");
+        document.getElementById("bgColorInput").value = hexInput.value;
+      }
+      changeStyle();
+    }
+
+    // Copy code to clipboard
+    function copyToClipboard() {
+      var codeText = document.getElementById("scrollToTopBtnCode").innerText;
+      navigator.clipboard.writeText(codeText).then(
+        function() {
+          // Flash the copy button to indicate success
+          var copyBtn = document.querySelector('.copy-btn');
+          copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+          setTimeout(function() {
+            copyBtn.innerHTML = '<i class="fas fa-copy"></i> Copy Code';
+          }, 2000);
+        },
+        function() {
+          alert("Failed to copy code");
+        }
+      );
+    }
+
+    // Change style function
+    function changeStyle() {
+      var scrollToTopBtn = document.getElementById("scrollToTopBtn");
+      var colorInput = document.getElementById("colorInput").value;
+      var bgColorInput = document.getElementById("bgColorInput").value;
+      var widthInput = document.getElementById("widthInput").value + "px";
+      var heightInput = document.getElementById("heightInput").value + "px";
+      var borderRadiusInput = document.getElementById("borderRadiusInput").value + "px";
+      var positionRightInput = document.getElementById("positionRightInput").value + "px";
+      var positionBottomInput = document.getElementById("positionBottomInput").value + "px";
+      var positionLeftInput = document.getElementById("positionLeftInput").value;
+      positionLeftInput = positionLeftInput ? positionLeftInput + "px" : "auto";
+      var fontSizeInput = document.getElementById("fontSizeInput").value + "px";
+      var paddingInput = document.getElementById("paddingInput").value + "px";
+
+      // Update color hex inputs
+      document.getElementById("colorHex").value = colorInput;
+      document.getElementById("bgColorHex").value = bgColorInput;
+
+      // Apply styles to button
+      scrollToTopBtn.style.color = colorInput;
+      scrollToTopBtn.style.backgroundColor = bgColorInput;
+      scrollToTopBtn.style.width = widthInput;
+      scrollToTopBtn.style.height = heightInput;
+      scrollToTopBtn.style.borderRadius = borderRadiusInput;
+      scrollToTopBtn.style.right = positionRightInput;
+      scrollToTopBtn.style.bottom = positionBottomInput;
+      scrollToTopBtn.style.left = positionLeftInput === "auto" ? "auto" : positionLeftInput;
+      scrollToTopBtn.style.fontSize = fontSizeInput;
+      scrollToTopBtn.style.padding = paddingInput;
+      scrollToTopBtn.style.display = "flex";
+      scrollToTopBtn.style.justifyContent = "center";
+      scrollToTopBtn.style.alignItems = "center";
+
+      // Update code display
+      var codeTag = document.getElementById("scrollToTopBtnCode");
+      var leftValue = positionLeftInput === "auto" ? "auto" : positionLeftInput;
+      
+      codeTag.innerHTML = `&lt;style id="scrollToTopBtnStyle"&gt;
 #scrollToTopBtn {
-display: none;
-position: absolute; /* Set to absolute position */
-border: none;
-cursor: pointer;
-text-align: center;
-bottom: 20px;
-padding: 10px; /* Initial padding value */
+  display: none;
+  position: fixed; /* Fixed position for scrolling with the page */
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  right: ${positionRightInput};
+  left: ${leftValue};
+  bottom: ${positionBottomInput};
+  padding: ${paddingInput};
+  color: ${colorInput};
+  background-color: ${bgColorInput};
+  width: ${widthInput};
+  height: ${heightInput};
+  border-radius: ${borderRadiusInput};
+  font-size: ${fontSizeInput};
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#scrollToTopBtn:hover {
+  background-color: ${adjustColor(bgColorInput, -15)};
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
 }
 &lt;/style&gt;
+
 &lt;button id="scrollToTopBtn" onclick="scrollToTop()"&gt;&lt;i class="fas fa-arrow-up"&gt;&lt;/i&gt;&lt;/button&gt;
+
 &lt;script&gt;
 // Show or hide the button based on scroll position
 window.onscroll = function() {
-var scrollToTopBtn = document.getElementById("scrollToTopBtn");
-if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-scrollToTopBtn.style.display = "block";
-} else {
-scrollToTopBtn.style.display = "none";
-}
+  var scrollToTopBtn = document.getElementById("scrollToTopBtn");
+  if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+    scrollToTopBtn.style.display = "flex";
+  } else {
+    scrollToTopBtn.style.display = "none";
+  }
 };
-// Scroll to the top of the page
+
+// Scroll to the top of the page with smooth animation
 function scrollToTop() {
-document.body.scrollTop = 0; // For Safari
-document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE, and Opera
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
 }
-&lt;/script&gt;
- </code>
-
-  </pre>
-
-</p>
-
-<br>
-
-
-
-
-
-
-
-<script>
-
-  // Show or hide the button based on scroll position
-
-  document.getElementById("container").onscroll = function() {
-
-    var scrollToTopBtn = document.getElementById("scrollToTopBtn");
-
-    if (document.getElementById("container").scrollTop > 0) {
-
-      scrollToTopBtn.style.display = "block";
-
-    } else {
-
-      scrollToTopBtn.style.display = "none";
-
+&lt;/script&gt;`;
     }
 
-  };
-
-
-
-  // Scroll to the top of the container
-
-  function scrollToTop() {
-
-    document.getElementById("container").scrollTop = 0;
-
-  }
-
-  // Change button style based on input values
-
-  function changeStyle() {
-
-    var scrollToTopBtn = document.getElementById("scrollToTopBtn");
-
-    var colorInput = document.getElementById("colorInput").value;
-
-    var bgColorInput = document.getElementById("bgColorInput").value;
-
-    var widthInput = document.getElementById("widthInput").value + "px";
-
-    var heightInput = document.getElementById("heightInput").value + "px";
-
-    var borderRadiusInput = document.getElementById("borderRadiusInput").value + "px";
-
-    var positionRightInput = document.getElementById("positionRightInput").value + "px";
-
-    var positionBottomInput = document.getElementById("positionBottomInput").value + "px";
-
-    var positionLeftInput = document.getElementById("positionLeftInput").value + "px";
-
-    var fontSizeInput = document.getElementById("fontSizeInput").value + "px";
-
-    var paddingInput = document.getElementById("paddingInput").value + "px";
-
-
-
-    // Update styles dynamically
-
-    scrollToTopBtn.style.color = colorInput;
-
-    scrollToTopBtn.style.backgroundColor = bgColorInput;
-
-    scrollToTopBtn.style.width = widthInput;
-
-    scrollToTopBtn.style.height = heightInput;
-
-    scrollToTopBtn.style.borderRadius = borderRadiusInput;
-
-    scrollToTopBtn.style.right = positionRightInput;
-
-    scrollToTopBtn.style.bottom = positionBottomInput;
-
-    scrollToTopBtn.style.left = positionLeftInput;
-
-    scrollToTopBtn.style.fontSize = fontSizeInput;
-
-    scrollToTopBtn.style.padding = paddingInput;
-
-
-
-    // Update styles within the code tag
-
-    var codeTag = document.getElementById("scrollToTopBtnCode");
-
-    codeTag.innerHTML = '&lt;style id="scrollToTopBtnStyle"&gt;\n #scrollToTopBtn {\n display: none;\n position: absolute; /* Set to absolute position */\n border: none;\n cursor: pointer;\n text-align: center;\n right: ' + positionRightInput + ';\n left: ' + positionLeftInput + ';\n bottom: ' + positionBottomInput + ';\n padding: ' + paddingInput + ';\n color: ' + colorInput + ';\n background-color: ' + bgColorInput + ';\n width: ' + widthInput + ';\n height: ' + heightInput + ';\n border-radius: ' + borderRadiusInput + ';\n }\n&lt;/style&gt;\n&lt;button id="scrollToTopBtn" onclick="scrollToTop()"&gt;&lt;i class="fas fa-arrow-up"&gt;&lt;/i&gt;&lt;/button&gt;\n&lt;script&gt;\n // Show or hide the button based on scroll position\n window.onscroll = function() {\n var scrollToTopBtn = document.getElementById("scrollToTopBtn");\n if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {\n scrollToTopBtn.style.display = "block";\n } else {\n scrollToTopBtn.style.display = "none";\n }\n };\n\n // Scroll to the top of the page\n function scrollToTop() {\n document.body.scrollTop = 0; // For Safari\n document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE, and Opera\n }\n&lt;/script&gt;';
-
-  }
-
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <script>
-
-  const currentPageLocation = window.location.href;
-
-  let displayedRepos = 0; // Counter for displayed repositories
-
-
-
-  // Fetch data from GitHub API
-
-  fetch('https://api.github.com/users/hoodaatwa/repos')
-
-    .then(response => response.json())
-
-    .then(data => {
-
-      // Extract topics of the current repository
-
-      const currentRepoTopics = data
-
-        .filter(repo => repo.homepage === currentPageLocation)
-
-        .flatMap(repo => repo.topics || []);
-
-
-
-      // Create Material-UI card for each repository with the same topics
-
-      const repoList = document.getElementById('repoList');
-
-      data.forEach(repo => {
-
-        const repoTopics = repo.topics || [];
-
-
-
-        if (
-
-          displayedRepos >= 4 ||
-
-          repo.homepage === currentPageLocation ||
-
-          !repoTopics.some(topic => currentRepoTopics.includes(topic))
-
-        ) {
-
-          // Skip creating card if reached the limit, homepage matches current page location,
-
-          // or repository has no common topics
-
-          return;
-
+    // Helper function to darken/lighten colors for hover effect
+    function adjustColor(color, amount) {
+      return '#' + color.replace(/^#/, '').replace(/../g, color => ('0' + Math.min(255, Math.max(0, parseInt(color, 16) + amount)).toString(16)).substr(-2));
+    }
+
+    // Repository list functionality
+    const currentPageLocation = window.location.href;
+    let displayedRepos = 0;
+    
+    fetch('https://api.github.com/users/hoodaatwa/repos')
+      .then(response => response.json())
+      .then(data => {
+        const currentRepoTopics = data
+          .filter(repo => repo.homepage === currentPageLocation)
+          .flatMap(repo => repo.topics || []);
+          
+        const repoList = document.getElementById('repoList');
+        
+        data.forEach(repo => {
+          const repoTopics = repo.topics || [];
+          
+          if (displayedRepos >= 4 || 
+              repo.homepage === currentPageLocation || 
+              !repoTopics.some(topic => currentRepoTopics.includes(topic))) {
+            return;
+          }
+          
+          const repoCard = document.createElement('div');
+          repoCard.classList.add('repo-card');
+          repoCard.innerHTML = `
+            <div class="repo-title">${repo.name}</div>
+            <div class="repo-description">${repo.description || 'No description available'}</div>
+            <div class="repo-link">
+              <a href="${repo.homepage}" target="_blank">
+                Visit <i class="fas fa-external-link-alt"></i>
+              </a>
+            </div>
+          `;
+          
+          repoList.appendChild(repoCard);
+          displayedRepos++;
+        });
+        
+        const mainRepo = data.find(repo => repo.name.toLowerCase() === 'main');
+        if (mainRepo) {
+          const mainRepoLink = document.createElement('div');
+          mainRepoLink.classList.add('center-link');
+          mainRepoLink.innerHTML = `
+            <a href="${mainRepo.homepage}" target="_blank">
+              Go to Main Page <i class="fas fa-external-link-alt"></i>
+            </a>
+          `;
+          
+          repoList.appendChild(mainRepoLink);
         }
+      })
+      .catch(error => console.error('Error fetching data:', error));
 
-
-
-        const repoCard = document.createElement('div');
-
-        repoCard.classList.add('repoCard');
-
-        repoCard.innerHTML = `
-
-          <div class="repoTitle">${repo.name}</div>
-
-          <div class="repoDescription">${repo.description}</div>
-
-          <div class="repoLink">
-
-            <a href="${repo.homepage}" target="_blank">Homepage <i class="fas fa-external-link-alt"></i></a>
-
-          </div>
-
-        `;
-
-        repoList.appendChild(repoCard);
-
-
-
-        displayedRepos++;
-
-      });
-
-
-
-      // Find the "Main" repository and create a special card with a dynamic link
-
-      const mainRepo = data.find(repo => repo.name.toLowerCase() === 'main');
-
-      if (mainRepo) {
-
-        const mainRepoCard = document.createElement('div');
-
-
-
-        mainRepoCard.innerHTML = `
-
-          <a class="center" href="${mainRepo.homepage}" target="_blank">Go to Main Page <i class="fas fa-external-link-alt"></i></a>
-
-        `;
-
-        repoList.appendChild(mainRepoCard);
-
+    // Toggle menu function
+    function toggleMenu() {
+      const menuOverlay = document.getElementById('menuOverlay');
+      const body = document.body;
+      const menuIcon = document.getElementById('menuIcon');
+      
+      if (menuOverlay.style.display === 'block') {
+        menuOverlay.style.display = 'none';
+        body.style.overflow = 'auto';
+        menuIcon.classList.replace('fa-times', 'fa-bars');
+      } else {
+        menuOverlay.style.display = 'block';
+        body.style.overflow = 'hidden';
+        menuIcon.classList.replace('fa-bars', 'fa-times');
       }
-
-    })
-
-    .catch(error => console.error('Error fetching data:', error));
-
-
-
-  function toggleMenu() {
-
-    const menuOverlay = document.getElementById('menuOverlay');
-
-    const body = document.body;
-
-    const menuIcon = document.getElementById('menuIcon');
-
-
-
-    if (menuOverlay.style.display === 'block') {
-
-      menuOverlay.style.display = 'none';
-
-      body.style.overflow = 'auto';
-
-      menuIcon.classList.replace('fa-times', 'fa-bars');
-
-    } else {
-
-      menuOverlay.style.display = 'block';
-
-      body.style.overflow = 'hidden';
-
-      menuIcon.classList.replace('fa-bars', 'fa-times');
-
     }
-
-  }
-
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
+  </script>
 </body>
-
-</html>
+  </html>
